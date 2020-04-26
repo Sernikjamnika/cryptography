@@ -23,10 +23,7 @@ def encrypt_file(input_path, output_path, cipher):
     cipher_text = bytearray()
     with open(input_path, mode="rb") as input_file:
         text = input_file.read()
-        chunks = [
-            text[chunk_start : chunk_start + 16]
-            for chunk_start in range(0, len(text), 16)
-        ]
+        chunks = [text[chunk_start : chunk_start + 16] for chunk_start in range(0, len(text), 16)]
         for chunk in chunks:
             cipher_text.extend(cipher.encrypt(chunk))
     with open(output_path, mode="wb") as output_file:
@@ -37,10 +34,7 @@ def decrypt_file(input_path, output_path, cipher):
     cipher_text = bytearray()
     with open(input_path, mode="rb") as input_file:
         text = input_file.read()
-        chunks = [
-            text[chunk_start : chunk_start + 16]
-            for chunk_start in range(0, len(text), 16)
-        ]
+        chunks = [text[chunk_start : chunk_start + 16] for chunk_start in range(0, len(text), 16)]
         for chunk in chunks:
             cipher_text.extend(cipher.decrypt(chunk))
     with open(output_path, mode="w") as output_file:
@@ -82,18 +76,11 @@ if __name__ == "__main__":
     parser.add_argument("--keystore_pass", required=True, help="Password to keystore")
     parser.add_argument("--key-id", required=True, help="Key identifier")
     parser.add_argument("--key-pass", required=True, help="Password to key")
-    parser.add_argument(
-        "--iv", required=True, help="Path to initial vector for encryption"
-    )
+    parser.add_argument("--iv", required=True, help="Path to initial vector for encryption")
     parser.add_argument("--mode", required=True, choices=MODES, help="Program mode")
     parser.add_argument(
-        "--encryption-type",
-        required=True,
-        choices=ENCRYPTION_TYPES.keys(),
-        help="Program mode",
+        "--encryption-type", required=True, choices=ENCRYPTION_TYPES.keys(), help="Program mode",
     )
-    parser.add_argument(
-        "--input-files", required=True, help="Paths to input files", nargs="+"
-    )
+    parser.add_argument("--input-files", required=True, help="Paths to input files", nargs="+")
     args = parser.parse_args()
     main(args)
