@@ -1,0 +1,9 @@
+FROM python:3.5-buster
+
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+RUN mkdir zad1
+
+WORKDIR zad1
+
+CMD ["python"]

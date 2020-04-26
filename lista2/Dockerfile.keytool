@@ -1,0 +1,7 @@
+# The keytool binary as Docker container
+FROM openjdk:alpine
+LABEL description="keytool"
+RUN mkdir zad1
+WORKDIR /zad1
+
+CMD ["keytool"]
